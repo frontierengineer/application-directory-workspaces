@@ -1,0 +1,14 @@
+{
+  "en": {
+    "error.directory_required": "Set the directory this provisioner keeps its workspaces in.",
+    "error.not_directory": "{directory} is a file, not a directory. Set the directory to a folder on this worker.",
+    "error.already_mounted": "{path} is already mounted for another workspace. Unmount that one first.",
+    "error.unknown_base": "There is no workspace named {base} under {directory} to start from. Name an existing workspace, or leave the base empty.",
+    "error.missing_template": "The template {template} is not a directory on this worker. Set the template to a directory, or leave it empty.",
+    "error.mount_failed": "Preparing the directory {path} did not finish: {reason}. Try again.",
+    "error.remove_failed": "Removing the directory {path} did not finish: {reason}. Try again.",
+    "error.check_failed": "{directory} cannot be read on this worker, so it is not known whether {path} is there. Check that the disk is there.",
+    "error.list_failed": "Listing the workspaces in {directory} did not finish: {reason}.",
+    "display.directory": "Directory"
+  }
+}
