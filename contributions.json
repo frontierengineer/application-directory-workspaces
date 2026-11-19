@@ -1,5 +1,5 @@
 {
-  "id": "github.com/frontierengineer/directory-workspaces",
+  "id": "github.com/frontierengineer/application-directory-workspaces",
   "title": "Directories",
   "color": "#2f9e44",
   "description": "Gives each workspace a plain directory of its own on a worker, kept as it is between mounts.",

@@ -11,7 +11,7 @@ export function fakeContext(): { context: WorkspaceProvisionerContext; base: str
   mkdirSync(join(base, 'scratch'));
   const quiet = async () => undefined;
   const context = {
-    applicationId: 'github.com/frontierengineer/directory-workspaces',
+    applicationId: 'github.com/frontierengineer/application-directory-workspaces',
     directories: { private: join(base, 'private'), scratch: join(base, 'scratch') },
     translate: (token: string) => translations.en?.[token] ?? token,
     logger: { debug: quiet, info: quiet, warn: quiet, error: quiet },
