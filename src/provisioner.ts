@@ -58,15 +58,24 @@ function inside(root: string, path: string): boolean {
   return between !== '' && !between.startsWith('..') && !isAbsolute(between);
 }
 
+// listSlots() and measure() answer within a call's wait, so a directory too
+// large to measure in this long is reported with no size.
+const measureTimeoutMilliseconds = 10_000;
+
 function sizeBytes(path: string): Promise<number | null> {
   return new Promise((done) => {
     const child = spawn('du', ['-sk', path], { stdio: ['ignore', 'pipe', 'ignore'] });
     let out = '';
+    const deadline = setTimeout(() => child.kill('SIGKILL'), measureTimeoutMilliseconds);
     child.stdout.on('data', (chunk: Buffer) => (out += chunk.toString('utf8')));
-    child.on('error', () => done(null));
-    child.on('close', () => {
+    child.on('error', () => {
+      clearTimeout(deadline);
+      done(null);
+    });
+    child.on('close', (code) => {
+      clearTimeout(deadline);
       const kib = Number(out.split('\t')[0]);
-      done(out.trim() !== '' && Number.isFinite(kib) ? kib * 1024 : null);
+      done(code !== null && out.trim() !== '' && Number.isFinite(kib) ? kib * 1024 : null);
     });
   });
 }
